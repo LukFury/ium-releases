@@ -63,6 +63,6 @@ ium mcp        # start the MCP server
 
 ## Questions
 
-[billing@copecode.dev](mailto:billing@copecode.dev)
+[uneakiyo@gmail.com](mailto:uneakiyo@gmail.com)
 
 *by COPE — copecode.dev*
