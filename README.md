@@ -57,7 +57,7 @@ ium mcp        # start the MCP server
 
 ## Pricing
 
-€15 / month. [Get a license →](https://copecode.dev)
+€15 / month. [Get a license →](https://buy.stripe.com/dRm14p7NvaQxdc610w2oE00)
 
 ---
 
