@@ -27,7 +27,8 @@ case "$ARCH" in
     ;;
 esac
 
-ARTIFACT="ium-${OS}-${ARCH}"
+# Artifact name (tarball)
+ARTIFACT="ium-${OS}-${ARCH}.tar.gz"
 
 # Get latest release tag
 echo "Fetching latest IUM release..."
@@ -42,23 +43,30 @@ fi
 URL="https://github.com/$REPO/releases/download/$LATEST/$ARTIFACT"
 
 echo "Downloading IUM $LATEST for $OS/$ARCH..."
-curl -fsSL "$URL" -o /tmp/ium-download
+curl -fsSL "$URL" -o /tmp/ium.tar.gz
 
-chmod +x /tmp/ium-download
+# Extract
+cd /tmp
+tar -xzf ium.tar.gz
+
+chmod +x ium
 
 # Install — try /usr/local/bin, fall back to ~/.local/bin
 if [ -w "$BIN_DIR" ]; then
-  mv /tmp/ium-download "$BIN_DIR/ium"
+  sudo mv ium "$BIN_DIR/ium" 2>/dev/null || mv ium "$BIN_DIR/ium"
   echo "IUM $LATEST installed to $BIN_DIR/ium"
 else
   FALLBACK="$HOME/.local/bin"
   mkdir -p "$FALLBACK"
-  mv /tmp/ium-download "$FALLBACK/ium"
+  mv ium "$FALLBACK/ium"
   echo "IUM $LATEST installed to $FALLBACK/ium"
   echo ""
   echo "Make sure $FALLBACK is in your PATH:"
   echo "  export PATH=\"\$PATH:$FALLBACK\""
 fi
 
+# Clean up
+rm -f /tmp/ium.tar.gz
+
 echo ""
-echo "Run 'ium --help' to get started."
+echo "Run 'ium --help' to get started"
