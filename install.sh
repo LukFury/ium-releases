@@ -65,6 +65,11 @@ else
   echo "  export PATH=\"\$PATH:$FALLBACK\""
 fi
 
+# Remove macOS quarantine flag so Gatekeeper does not block the binary
+if [ "$OS" = "macos" ]; then
+  xattr -d com.apple.quarantine "$(command -v ium)" 2>/dev/null || true
+fi
+
 # Clean up
 rm -f /tmp/ium.tar.gz
 
